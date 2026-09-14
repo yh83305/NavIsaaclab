@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.pt
+*.pth
+*.ckpt
+*.onnx
+.pytest_cache/
+.venv/
+build/
+dist/
+*.egg-info/
+output/
+wandb/
+data/
+assets/
+checkpoints/
+.env
