@@ -15,7 +15,7 @@ documentation are included in this repository.
 
 ## Crowd navigation demo
 
-![FLUX crowd-navigation evaluation](media/20260824_145909_run1.gif)
+![FLUX crowd-navigation evaluation](media/20260827_184440_run1.gif)
 
 ## Included
 
