@@ -1,0 +1,48 @@
+{
+  "environment": {
+    "num_envs": 64,
+    "num_neighbors": 4,
+    "world_size": 10.0,
+    "dt": 0.1,
+    "max_episode_steps": 250,
+    "min_start_goal_distance": 2.0,
+    "max_start_goal_distance": 8.0
+  },
+  "network": {
+    "hidden_dims": [128, 128],
+    "vector_hidden_dims": [128, 128],
+    "actor_hidden_dims": [128],
+    "critic_hidden_dims": [128]
+  },
+  "algorithm": {
+    "lr": 0.0003,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_ratio": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.005,
+    "max_grad_norm": 1.0,
+    "ppo_epochs": 4,
+    "minibatch_size": 256
+  },
+  "training": {
+    "total_steps": 1000000,
+    "rollout_steps": 128,
+    "save_interval": 100000
+  },
+  "curriculum": {
+    "enabled": true,
+    "window_size": 200,
+    "min_episodes": 100,
+    "update_interval_episodes": 50,
+    "promote_success_rate": 0.75,
+    "demote_success_rate": 0.45,
+    "initial_stage": 0,
+    "stages": {
+      "short_straight": {"distance": [2.0, 4.0], "heading_degrees": [0.0, 15.0]},
+      "short_turn": {"distance": [3.0, 5.0], "heading_degrees": [10.0, 45.0]},
+      "medium_turn": {"distance": [4.0, 7.0], "heading_degrees": [20.0, 75.0]},
+      "full": {"distance": [6.0, 8.0], "heading_degrees": [30.0, 120.0]}
+    }
+  }
+}

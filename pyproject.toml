@@ -18,6 +18,10 @@ dependencies = [
 [project.optional-dependencies]
 test = ["pytest>=7"]
 
+[project.scripts]
+crowdsim-ppo-train = "crowdsim_ppo.train:main"
+crowdsim-ppo-eval = "crowdsim_ppo.evaluate:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

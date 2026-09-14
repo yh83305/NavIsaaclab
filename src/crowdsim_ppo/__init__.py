@@ -8,6 +8,7 @@ from .ppo_policy import (
     RobotRolloutBuffer,
     bounded_robot_action,
 )
+from .point_goal_env import PointGoalBatchEnv, PointGoalEnvConfig
 
 __all__ = [
     "GoalCurriculumSpec",
@@ -18,4 +19,6 @@ __all__ = [
     "RobotPPOTrainer",
     "RobotRolloutBuffer",
     "bounded_robot_action",
+    "PointGoalBatchEnv",
+    "PointGoalEnvConfig",
 ]
