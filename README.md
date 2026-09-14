@@ -15,7 +15,7 @@ documentation are included in this repository.
 
 ## Crowd navigation demo
 
-![FLUX crowd-navigation evaluation](media/20260827_184440_run1.gif)
+![PPO rollout with 20 humanoids and 20 robots](media/ppo_20h20r_run_ep0015.gif)
 
 ## Included
 
