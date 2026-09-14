@@ -11,7 +11,7 @@ dist/
 *.egg-info/
 output/
 wandb/
-data/
-assets/
-checkpoints/
+/data/
+/assets/
+/checkpoints/
 .env

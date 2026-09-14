@@ -1,0 +1,17 @@
+_include: ../collect/ppo.yaml
+
+collection:
+  headless: true
+  collect_steps: 100000
+  min_episode_len: 16
+  only_success: false
+  checkpoint_every: 20
+  output_dir: output/analysis/ppo_fixed_route_100
+
+gif:
+  out: output/analysis/ppo_fixed_route_100/preview/run.gif
+  fps: 7.5
+  every_episodes: 20
+
+wandb:
+  enabled: false

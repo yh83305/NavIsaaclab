@@ -1,0 +1,7 @@
+prim_path: /World/Scene
+z_offset: 0.0
+scene_usd: /data/DynBench/isaacsim_scene/Office/office_partnav.usd
+scene_map: /data/DynBench/isaacsim_scene/Office/map/occupancy.yaml
+static_obstacles: true
+remove_prims: []
+objects: {}

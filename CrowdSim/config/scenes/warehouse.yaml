@@ -1,0 +1,40 @@
+# Warehouse scene configuration
+# 20m×30m warehouse with 30 static obstacles (~4m grid spacing)
+
+prim_path: /World/Scene
+z_offset: 0.0
+scene_usd: ../Assets/Simple_Warehouse/warehouse_multiple_shelves.usd
+scene_map: CrowdSim/maps/newmap.yaml
+static_obstacles: true
+remove_prims: [Shelf, PalletBin]
+objects:
+  # (x, y, z,  width, depth, height, shape)
+  box_0:  [ -8.7, -11.1, 0.0,  0.5, 0.4, 0.7, box]
+  box_2:  [ -3.0, -10.6, 0.0,  0.6, 0.6, 0.9, box]
+  box_4:  [  3.0, -10.9, 0.0,  0.4, 0.5, 0.8, box]
+  box_6:  [ -8.9,  -7.6, 0.0,  0.6, 0.6, 0.6, box]
+  box_8:  [ -2.9,  -7.4, 0.0,  0.5, 0.5, 0.8, box]
+  box_10: [  3.0,  -7.3, 0.0,  0.6, 0.7, 1.1, box]
+  box_12: [ -8.8,  -4.5, 0.0,  0.6, 0.5, 1.1, box]
+  box_14: [ -2.9,  -4.6, 0.0,  0.5, 0.7, 0.9, box]
+  cyl_16: [  3.3,  -4.8, 0.0,  0.5, 0.5, 1.5, cylinder]
+  cyl_18: [ -8.7,  -2.0, 0.0,  0.4, 0.4, 0.6, cylinder]
+  box_20: [ -2.6,  -1.7, 0.0,  0.4, 0.6, 0.9, box]
+  box_22: [  3.1,  -1.3, 0.0,  0.5, 0.5, 0.9, box]
+  box_24: [ -8.7,   1.7, 0.0,  0.5, 0.7, 0.9, box]
+  box_26: [ -2.9,   1.6, 0.0,  0.6, 0.4, 0.8, box]
+  box_28: [  2.8,   1.0, 0.0,  0.7, 0.4, 0.7, box]
+  cyl_30: [ -9.0,   4.3, 0.0,  0.4, 0.4, 0.7, cylinder]
+  box_32: [ -2.7,   4.4, 0.0,  0.5, 0.5, 1.1, box]
+  box_34: [  3.1,   4.6, 0.0,  0.5, 0.7, 0.9, box]
+  box_36: [ -9.1,   7.3, 0.0,  0.7, 0.7, 0.7, box]
+  cyl_38: [ -2.6,   7.6, 0.0,  0.4, 0.4, 0.9, cylinder]
+  box_40: [  3.2,   7.6, 0.0,  0.4, 0.6, 1.1, box]
+  box_42: [ -8.8,  10.0, 0.0,  0.5, 0.6, 0.9, box]
+  box_44: [ -3.0,  10.2, 0.0,  0.4, 0.6, 0.9, box]
+  cyl_46: [  3.0,  10.2, 0.0,  0.6, 0.6, 1.2, cylinder]
+  box_48: [ -9.1,  13.6, 0.0,  0.4, 0.4, 0.9, box]
+  box_50: [ -2.8,  13.6, 0.0,  0.4, 0.5, 0.8, box]
+  box_52: [  3.2,  13.0, 0.0,  0.6, 0.7, 0.9, box]
+  box_54: [ -9.2,  16.2, 0.0,  0.6, 0.5, 0.9, box]
+  cyl_56: [ -2.6,  16.1, 0.0,  0.4, 0.4, 1.3, cylinder]

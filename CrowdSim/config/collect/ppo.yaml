@@ -1,0 +1,157 @@
+# CrowdSim config for PPO data collection (collect_ppo_buffer.py).
+#
+# Mirrors cbf_collect.yaml but drops the CBF-only sections: the robot is driven
+# by a frozen PPO policy (not the serial CBF NLP), so planning_clearance reverts
+# to the training value (0.5) and there is no `cbf:` block.  RGB+depth are
+# recorded for CFM training, identical to the CBF collection.
+#
+# Key points:
+#   • ten robots collect synchronized episodes in parallel.
+#   • map/depth/RGB are enabled and recorded as separate CFM modalities.
+#   • curriculum disabled — fixed crowd density throughout the rollout.
+
+scene: warehouse
+
+
+humanoid:
+  human_mesh: true
+  hide_humanoid: true
+  checkpoint: data/pretrained_models/masked_mimic/smpl/last.ckpt
+  motion_file: ../Assets/motion/amass_smpl_validation.pt
+  min_heading_speed: 0.05
+
+
+car:
+  usd: nova_carter
+  prim_name: Car
+  z: 0.0
+
+
+sensors:
+  camera:
+    enabled: true
+    height: 480
+    width: 640
+    horizontal_fov: 90.0
+    # Rigid mount in the Car local frame (+x = forward, +z = up).  Keeping it
+    # close to the chassis avoids the orbit of a rear chase-camera offset.
+    mount_prim_path: chassis_link
+    pos: [0.25, 0.0, 0.6]
+    rot: [0.5, -0.5, 0.5, -0.5]
+    convention: ros
+  lidar:
+    enabled: false
+    horizontal_res: 1.0
+    mesh_prims: [/World/Scene]
+
+
+navigation:
+
+  num_humanoids: 10
+  num_robots: 10
+
+  path:
+    seed: 7
+    planning_step_size: 0.5
+    planning_clearance: 0.5       # training value — PPO has no CBF barrier, so
+                                  # goals need not respect a safety radius.
+    min_start_goal_distance: 7.0
+    max_start_goal_distance: 10.0
+    min_spawn_spacing: 1.5
+  goal_tolerance: 0.75
+  waypoint_tolerance: 0.5
+  collision_distance: 0.7
+
+  local:
+    target_timestep: 8.333333    # preserve the former 0.333 s target horizon
+    max_speed: 1.0
+    agent_radius: 0.35
+    safe_distance: 1.2
+    neighbor_radius: 4.0
+    interaction_radius: 5.0
+    velocity_smoothing: 0.8
+    max_acceleration: 4.0
+    max_yaw_rate: 3.0
+    prediction_horizon: 3.5
+    ttc_threshold: 3.0
+    ttc_gain: 28.0
+
+  update_hz: 25.0
+  log_interval: 30
+
+  rl:
+    num_neighbors: 4
+    map_enabled: true
+    map_size: 24
+    max_linear_velocity: 1.0
+    max_angular_velocity: 1.0
+    initial_heading_min_offset_degrees: 30.0
+    initial_heading_max_offset_degrees: 120.0
+    depth_enabled: true
+    depth_size: 224
+    depth_max_range: 5.0
+    rgb_enabled: true
+    rgb_size: 224
+    max_episode_steps: 1000
+    stuck_window: 250            # 10 seconds at 25 Hz
+    stuck_threshold: 0.1         # metres — robot is stuck if it moved less than this
+
+  recording:
+    enabled: true
+    output_dir: output/crowdsim_navigation
+
+
+# ── Network architecture (MUST match the trained PPO checkpoint) ─────
+# Reconstructs the exact RobotActorCritic used at train time so the checkpoint
+# loads without shape mismatches.  Keep this in sync with env.yaml.
+network:
+  vector_hidden_dims: [128, 128]
+  actor_hidden_dims: [256, 128, 32]
+  critic_hidden_dims: [256, 128, 32]
+  map_encoder:
+    channels: [8, 16, 8]
+    kernel_sizes: [3, 3, 3]
+    strides: [2, 2, 1]
+    paddings: [1, 1, 1]
+  depth_encoder:
+    channels: [16, 32]
+    kernel_sizes: [3, 3]
+    strides: [2, 2]
+    paddings: [1, 1]
+    feature_dim: 64
+
+
+# ── Data-collection runtime params ──────────────────────────────────
+# All can be overridden by the matching CLI flag (e.g. --collect-steps N).
+collection:
+  headless: true                # run without a display window
+  checkpoint_every: 100
+  collect_steps: 20000
+  min_episode_len: 16            # discard episodes shorter than this
+  only_success: true            # keep only episodes that reached the goal
+  # PPO collection artifacts are isolated from CBF collection:
+  # raw_*.pt, checkpoints/, GIF previews, and wandb_collect/.
+  output_dir: output/collect_buffer/ppo
+
+route_guidance:
+  lateral_offset_m: 1.5
+  static_clearance_m: 0.8
+  waypoint_spacing_m: 2.0
+  waypoint_tolerance_m: 1.0
+
+
+# ── GIF preview ─────────────────────────────────────────────────────
+# Per-episode full-panel GIF (bird's-eye + RGB + depth + obs + action, every
+# frame).  Omit gif.out (or set null) to skip GIF rendering entirely.
+# every_episodes: render one GIF every N completed episodes (saved as
+#   run_ep{N:04d}.gif next to gif.out, uploaded to wandb).
+gif:
+  out: output/collect_buffer/ppo/preview/run.gif
+  fps: 7.5
+  every_episodes: 10
+
+
+# ── W&B logging ─────────────────────────────────────────────────────
+wandb:
+  enabled: true
+  project: crowdsim-flow-data

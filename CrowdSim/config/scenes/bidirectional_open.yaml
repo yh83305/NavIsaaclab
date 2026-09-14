@@ -1,0 +1,11 @@
+# Open version of the warehouse coordinate frame for the controlled
+# bidirectional-flow experiment. The warehouse shell supplies the floor and
+# lighting, while shelves, pallet bins and generated scene objects are removed.
+
+prim_path: /World/Scene
+z_offset: 0.0
+scene_usd: ../Assets/Simple_Warehouse/warehouse_multiple_shelves.usd
+scene_map: CrowdSim/maps/newmap.yaml
+static_obstacles: false
+remove_prims: [Shelf, PalletBin]
+objects: {}

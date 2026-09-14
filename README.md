@@ -1,12 +1,17 @@
 # NavIsaaclab PPO
 
-An end-to-end PyTorch PPO example for robot PointGoal navigation. The repository
-contains the policy, rollout storage, PPO optimizer, curriculum, a lightweight
-vectorized environment, checkpoint/resume logic, and deterministic evaluation.
+An end-to-end PPO repository for robot PointGoal navigation. It contains both the
+lightweight standalone example and the original Isaac Lab + ProtoMotions CrowdSim
+training stack.
 
 The included 2-D environment is a simulator-free reference pipeline. It keeps the
 same high-level observation and bounded differential-drive action conventions as
 the larger CrowdSim stack without requiring Isaac Sim, scene assets, or checkpoints.
+
+For the real simulator pipeline, start with [FULL_PIPELINE.md](FULL_PIPELINE.md)
+and [CrowdSim/ppo/README.md](CrowdSim/ppo/README.md). ProtoMotions source,
+simulator adapters, environments, PPO agents, robot definitions, examples and
+documentation are included in this repository.
 
 ## Included
 

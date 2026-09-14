@@ -1,0 +1,2 @@
+"""Humanoid-only CrowdSim diagnostics."""
+

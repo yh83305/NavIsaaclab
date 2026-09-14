@@ -1,0 +1,6 @@
+image: World1.png
+resolution: 0.05
+origin: [-10.325000381469726, -12.174999809265136, 0.0000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
