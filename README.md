@@ -13,6 +13,10 @@ and [CrowdSim/ppo/README.md](CrowdSim/ppo/README.md). ProtoMotions source,
 simulator adapters, environments, PPO agents, robot definitions, examples and
 documentation are included in this repository.
 
+## Crowd navigation demo
+
+![FLUX crowd-navigation evaluation](media/20260824_145909_run1.gif)
+
 ## Included
 
 - Multimodal actor-critic with vector, neighbor, depth, and local-map encoders
