@@ -15,7 +15,7 @@ documentation are included in this repository.
 
 ## Crowd navigation demo
 
-![PPO rollout with 20 humanoids and 20 robots](media/ppo_20h20r_run_ep0015.gif)
+![FLUX rollout with 20 humanoids and 3 robots](media/flux_topdown_20h3r.gif)
 
 ## Included
 
