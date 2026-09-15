@@ -1,21 +1,28 @@
-# NavIsaaclab PPO
+# NavIsaacLab 2.0
 
-An end-to-end PPO repository for robot PointGoal navigation. It contains both the
-lightweight standalone example and the original Isaac Lab + ProtoMotions CrowdSim
-training stack.
+NavIsaacLab 2.0 provides a training and evaluation stack for human-aware robot navigation in simulated shared human-robot environments. Built on Isaac Lab and ProtoMotions, it supports GPU-parallel simulation, rgb&depth visual observations, navigation environments, PPO, and evaluation tools for studying navigation around dynamic pedestrians. The repository includes the complete Isaac Lab + ProtoMotions CrowdSim training and evaluation pipeline. For the full simulator workflow, see [FULL_PIPELINE.md](FULL_PIPELINE.md) and [CrowdSim/ppo/README.md](CrowdSim/ppo/README.md).
 
-The included 2-D environment is a simulator-free reference pipeline. It keeps the
-same high-level observation and bounded differential-drive action conventions as
-the larger CrowdSim stack without requiring Isaac Sim, scene assets, or checkpoints.
+## Links
 
-For the real simulator pipeline, start with [FULL_PIPELINE.md](FULL_PIPELINE.md)
-and [CrowdSim/ppo/README.md](CrowdSim/ppo/README.md). ProtoMotions source,
-simulator adapters, environments, PPO agents, robot definitions, examples and
-documentation are included in this repository.
+- [Project website](https://broln7.github.io/NavIsaacLab-web/)
+- [Paper](https://arxiv.org/abs/2606.26265) · [PDF](https://arxiv.org/pdf/2606.26265)
+- **Accepted by IEEE Transactions on Automation Science and Engineering (T-ASE).**
 
 ## Crowd navigation demo
 
+### FLUX crowd rollout
+
 ![FLUX rollout with 20 humanoids and 3 robots](media/flux_topdown_20h3r.gif)
+
+*Figure 1. PPO controls three robots among 20 moving humanoids, shown from
+the fixed oblique top-down camera.*
+
+### PPO first-person rollout
+
+![PPO rollout with onboard observations](media/ppo_20h20r_run_ep0015.gif)
+
+*Figure 2. PPO rollout visualization combining the global map with onboard RGB
+and depth observations in a 20-humanoid, 20-robot scene.*
 
 ## Included
 
@@ -119,12 +126,6 @@ action, raw_action, log_prob, value = model.act(
     neighbors=neighbors,
     neighbor_mask=neighbor_mask,
 )
-```
-
-## Tests
-
-```bash
-pytest
 ```
 
 ## Repository layout
